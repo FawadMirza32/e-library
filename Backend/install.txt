@@ -1,0 +1,5 @@
+in front-end folder, install dependencies
+npm install --save redux
+npm i redux-provider
+npm i -S redux
+npm i -S react-redux
