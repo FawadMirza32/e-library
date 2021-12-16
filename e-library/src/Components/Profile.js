@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { removeUserSession, getUser } from '../Utils/Common'
 import ProfileStyles from './Profile.module.css' 
 
+import UserInfoUIComponent from './UserInfoUIComponent'
 
 function Profile() {
 
@@ -14,28 +15,31 @@ function Profile() {
     navigate('/login');
   }
 
+  // Declare new state variable, for displaying history/fav/wishlist
+  const [display, setDisplay] = useState("history");
+
   return (
     
     <div className={`${ProfileStyles.bg} ${ProfileStyles.fullcover}`}>
     <h1 className={ProfileStyles.title_pen}>Hello! {user.username} </h1>
       <div className={ProfileStyles.user_profile}>
-	<img className={ProfileStyles.avatar} src="https://i.ibb.co/51TqWNd/Whats-App-Image-2021-12-07-at-7-01-04-PM.jpg" alt="User Profile pic" />
+	<img className={ProfileStyles.avatar} src="https://i.ibb.co/YWzQZVd/profile-pic-logo.jpg" alt="User Profile pic" />
     <div className={ProfileStyles.username}>{user.name}</div>
   <div className={ProfileStyles.bio}>
-  	Bio
+  <input type="text" id="bio" name="bio" placeholder="Bio" />
   </div>
     <div className={ProfileStyles.description}>
-    Profession
+    <input type="text" id="profession" name="profession" placeholder="Profession" />
   </div>
   <ul className={ProfileStyles.data}>
     <li>
-      <span > FAVOURITES</span>
+      <span onClick={()=>setDisplay("fav")} > FAVOURITES</span>
     </li>
     <li>
-      <span > WISHLIST</span>
+      <span onClick={()=>setDisplay("wishlist")}> WISHLIST</span>
     </li>
     <li>
-      <span > HISTORY</span>
+      <span onClick={()=>setDisplay("history")}> HISTORY</span>
     </li>
   </ul>
        
@@ -46,6 +50,8 @@ function Profile() {
 
 </div>
 
+{/* TODO: paginate this list component */}
+<UserInfoUIComponent display={display}/> 
 
 </div>
      )
